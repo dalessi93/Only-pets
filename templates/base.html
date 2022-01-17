@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Only Pets</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <header>
+        <a href="/"><img src="/static/images/only_pets_logo.png" alt="logo"></a>
+        {% if session.get('user_id') %}
+        <ul>
+            <li><a href="/home">Home</a></li>
+            <li><a href="/gallery">Gallery</a></li>
+            <li><a href="">Friends</a></li>
+            <li><a href="/logout">Logout</a></li>
+        </ul>
+        {% else %}
+        <p>Welcome to <strong>PetHub</strong> your one stop website for all your pet needs.</p> 
+        {% endif %}
+    </header>
+    <main>
+        {% block content %}
+        {% endblock content %}
+    </main>
+</body>
+</html>
