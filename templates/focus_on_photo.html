@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div id='picture_options'>
+    <a href="/set/profile_img?photo_id={{post_id}}">Set as profile picture</a>
+    <p>|</p>
+    <a href="/set/background_img?photo_id={{post_id}}">Set as profile background</a>
+</div>
+<div>
+    <img src="{{img_url}}" alt="">
+    <h4>{{caption}}</h4>
+</div>
+<a href="/redirect/gallery">back</a>
+
+{% endblock content %}

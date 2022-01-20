@@ -1,10 +1,20 @@
 {% extends "base.html" %}
 {% block content %}
 
-<p>hi</p>
+<h1>My Photos</h1>
+<div>
+    <form action="/upload/image" method="post">
+        <input id="text" name="text" type="text" value="... upload image .jpg .png "/>
+        <button type="submit">Upload</button>
+    </form>
+</div>
+<br>
 <div id="gallery">
-    
-
+{% for item in photo_select %}
+    <div>
+        <a href="/photo?photo_id={{item['post_id']}}"><img src="{{item['image']}}" alt=""></a>
+    </div>
+{% endfor %}
 </div>
 
 {% endblock content %}

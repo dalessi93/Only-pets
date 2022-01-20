@@ -17,6 +17,12 @@ def logged_in():
     if valid_password:
         session["user_id"] = user["id"]
         session["user_name"] = user["first_name"]
+        session["user_surname"] = user["last_name"]
+        session["user_address"] = user["address"]
+        session["user_country"] = user["country"]
+        session["user_breed"] = user["breed"]
+        session["user_background_img"] = user["background_img"]
+        session["user_profile_img"] = user["profile_img"]
         return redirect("/home")
     else:
         return redirect("/")

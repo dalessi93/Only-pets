@@ -1,0 +1,1 @@
+create table posts (post_id SERIAL primary key, user_id Integer, image text, post text, constraint fk_user foreign key(user_id) references users(id))

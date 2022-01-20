@@ -54,3 +54,18 @@ hr{
     position: relative;
     top: -25px;
 }
+.home_options{
+    display: flex;
+    justify-content: center;
+    position: relative;
+    top: -40px;
+}
+.home_options a{
+    text-decoration: none;
+    color: inherit;
+}
+#picture_options a, p{
+    display: inline;
+    color: blue;
+    text-decoration: none;
+}
