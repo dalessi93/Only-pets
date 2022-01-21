@@ -2,29 +2,31 @@
 {% block content %}
 
 <div id="home">
-    <div id="header">
-        <div class="home_image">
-            <img id="background_img" src="{{session['user_background_img']}}" alt="background_image">
-        </div>
-        <div class="home_image">
-            <img id="profile_img" src="{{session['user_profile_img']}}" alt="profile_image">
-        </div>
-    </div>
-    <div class="home_name">
-        <p>{{session["user_name"]}} {{session["user_surname"]}}</p>
-    </div>
-    <div class="home_options">
-        <button><a href="/gallery">Add Photo</a></button>
-        <button><a href="/edit_profile">Edit Profile</a></button>
-    </div>
-    <hr>
     <div>
-        <ul>
-            <li>{{session["user_address"]}}</li>
-            <li>{{session["user_country"]}}</li>
-            <li>{{session["user_breed"]}}</li>
-        </ul>
-    </div>  
+        <div id="header">
+            <div class="home_image">
+                <img id="background_img" src="{{session['user_background_img']}}" alt="background_image">
+            </div>
+            <div class="home_image">
+                <img id="profile_img" src="{{session['user_profile_img']}}" alt="profile_image">
+            </div>
+        </div>
+        <div class="home_name">
+            <p id="user_name">{{session["user_name"]}} {{session["user_surname"]}}</p>
+        </div>
+        <div class="home_options">
+            <button><a href="/gallery">Add Photo</a></button>
+            <button><a href="/edit_profile">Edit Profile</a></button>
+        </div>
+        <hr>
+        <div>
+            <ul>
+                <li>{{session["user_address"]}}</li>
+                <li>{{session["user_country"]}}</li>
+                <li>{{session["user_breed"]}}</li>
+            </ul>
+        </div>
+    </div> 
 </div>
 
 {% endblock content %}

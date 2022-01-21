@@ -1,20 +1,22 @@
 {% extends "base.html" %}
 {% block content %}
 
-<div>
-    <form action="/loggedIn" method="post">
-        <div>
-            <input id="email" name="email" type="text" placeholder="Email"/>
-        </div>
-        <div>
-            <input id="password" name="password" type="text" placeholder="Password"/>
-        </div>
-        <div>
-            <button id='login' type="submit">Log In</button>
-        </div>
-    </form>
+<div id="login">
     <div>
-        <a href="/signup"><button id='signup'>Create New Account</button></a>
+        <form action="/loggedIn" method="post">
+            <div>
+                <input id="email" name="email" type="text" placeholder="Email"/>
+            </div>
+            <div>
+                <input id="password" name="password" type="text" placeholder="Password"/>
+            </div>
+            <div>
+                <button id='login_btn' type="submit">Log In</button>
+            </div>
+        </form>
+        <div>
+            <a href="/signup"><button id='signup'>Create New Account</button></a>
+        </div>
     </div>
 </div>
 

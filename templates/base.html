@@ -9,21 +9,28 @@
 </head>
 <body>
     <header>
-        <a href="/"><img src="/static/images/only_pets_logo.png" alt="logo"></a>
+        <div id="logobox">
+            <a href="/"><img id="logo" src="/static/images/only_pets_logo.png" alt="logo"></a>
+        </div>
+        <div id="navigationbox">
         {% if session.get('user_id') %}
-        <ul>
-            <li><a href="/home">Home</a></li>
-            <li><a href="/gallery">Gallery</a></li>
-            <li><a href="">Friends</a></li>
-            <li><a href="/logout">Logout</a></li>
-        </ul>
+            <ul>
+                <li><a href="/home">Home</a></li>
+                <li><a href="/gallery">Gallery</a></li>
+                <li><a href="/friend/list">Friends</a></li>
+                <li><a href="/logout">Logout</a></li>
+            </ul>
         {% else %}
-        <p>Welcome to <strong>PetHub</strong> your one stop website for all your pet needs.</p> 
+
+            <p>Welcome to <strong>PetHub</strong> your one stop website for all your pet needs.</p> 
         {% endif %}
+        </div>
     </header>
     <main>
+        <div id="box">
         {% block content %}
         {% endblock content %}
+        </div>
     </main>
 </body>
 </html>

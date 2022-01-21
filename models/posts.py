@@ -16,3 +16,13 @@ def img_update(new_img, id):
 # UPDATE BACKGROUND IMAGE
 def background_update(new_img, id):
     database.sql_write("UPDATE users SET background_img = %s WHERE id = %s", [new_img, id])
+
+# UPLOAD NEW IMAGE
+def upload_new_img(user_id, image, post):
+    database.sql_write("INSERT INTO posts (user_id, image, post) VALUES (%s, %s, %s)", [user_id, image, post])
+
+# SEARCH FRIEND
+def search_user(name):
+    # Why "SELECT * FROM users WHERE first_name LIKE CONCAT(%, %s, %), [name]" does not work? Also, LIKE case insensitive property not working.
+    results = database.sql_select("SELECT * FROM users WHERE first_name LIKE %s", [name])
+    return results

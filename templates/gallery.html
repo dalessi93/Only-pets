@@ -1,17 +1,29 @@
 {% extends "base.html" %}
 {% block content %}
-
-<h1>My Photos</h1>
-<div>
-    <form action="/upload/image" method="post">
-        <input id="text" name="text" type="text" value="... upload image .jpg .png "/>
-        <button type="submit">Upload</button>
-    </form>
+<div id="friend_search">
+    <h1>My Photos</h1>
+    <div>
+        <form action="/upload/image" method="post">
+            <div>
+                <input id="image_url" name="image_url" type="text" placeholder=".jpg .png"/>
+                <label for="image_url">Image URL</label>
+            </div>
+            <div>
+                <input id="caption" name="caption" type="text" placeholder="caption"/>
+                <label for="caption">Caption</label>
+            </div>
+            <div>
+                <button type="submit">Upload</button>
+            </div>
+        </form>
+    </div>
 </div>
+
 <br>
+
 <div id="gallery">
 {% for item in photo_select %}
-    <div>
+    <div class="column">
         <a href="/photo?photo_id={{item['post_id']}}"><img src="{{item['image']}}" alt=""></a>
     </div>
 {% endfor %}

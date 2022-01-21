@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% block content %}
+<div id="home">
+    <div>
+        <a id="back" href="/friend/list">back</a>
+        <div id="header">
+            <div class="home_image">
+                <img id="background_img" src="{{user_background}}" alt="background_image">
+            </div>
+            <div class="home_image">
+                <img id="profile_img" src="{{user_profile}}" alt="profile_image">
+            </div>
+        </div>
+        <div class="home_name">
+            <p id="user_name">{{user_name}} {{user_surname}}</p>
+        </div>
+        <div class="home_options">
+            <button><a href="/view/photos?user_id={{user_id}}">View Photos</a></button>
+            <button><a href="">Follow</a></button>
+        </div>
+        <hr>
+        <div>
+            <ul>
+                <li>{{user_address}}</li>
+                <li>{{user_country}}</li>
+                <li>{{user_breed}}</li>
+            </ul>
+        </div>  
+    </div>
+</div>
+
+
+{% endblock content %}

@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% block content %}
+<div id="friend_search">
+    <a id="back" href="/friend/list">back</a>
+
+    <div id="gallery">
+        {% for item in posts_info %}
+            <div>
+                <a href="/friend/photo?photo_id={{item['post_id']}}"><img src="{{item['image']}}" alt=""></a>
+            </div>
+        {% endfor %}
+    </div>
+</div>
+
+{% endblock content %}

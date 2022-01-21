@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div id="friend_search">
+        <div>
+            <h2>Search Results</h2>
+        {% for user in show_user %}
+            {% if user['id'] != session["user_id"]%}
+            <div>
+                <img src="{{user['profile_img']}}" alt="profile_image">
+                <a id="friend_result" href="/user_profile?user_id={{user['id']}}">{{user['first_name']}} {{user['last_name']}}</a>
+            </div>
+            {% endif %}
+        {% endfor %}
+        </div>
+</div>
+<br>
+<a id="back" href="/redirect/friend">back</a>
+{% endblock content %}

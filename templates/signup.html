@@ -1,24 +1,26 @@
 {% extends "base.html" %}
 {% block content %}
 
-<div className="signup-form">
-    <form action="/signup/submission" method="post">
-        <h2>Sign Up</h2>
-        <div>It's quick and easy.</div>
-        <div>
-            <input id="first name" name="first name" type="text" placeholder="First name"/>
-            <input id="surname" name="surname" type="text" placeholder="Surname"/>
-        </div>
-        <div>
-            <input id="email" name="email" type="text" placeholder="Email"/>
-        </div>
-        <div>
-            <input id="password" name="password" type="text" placeholder="Password"/>
-        </div>
-        <div>
-            <button type="submit" id='signup'>Sign up</button>
-        </div>
-    </form>
+<div id="signup-form">
+    <div>
+        <form action="/signup/submission" method="post">
+            <h2>Sign Up</h2>
+            <div>It's quick and easy.</div>
+            <div>
+                <input id="first name" name="first name" type="text" placeholder="First name"/>
+                <input id="surname" name="surname" type="text" placeholder="Surname"/>
+            </div>
+            <div>
+                <input id="email" name="email" type="text" placeholder="Email"/>
+            </div>
+            <div>
+                <input id="password" name="password" type="text" placeholder="Password"/>
+            </div>
+            <div>
+                <button type="submit" id='signup'>Sign up</button>
+            </div>
+        </form>
+    </div>
 </div>
 
 {% endblock content %}

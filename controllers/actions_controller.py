@@ -1,7 +1,7 @@
 from flask import Blueprint, request, session, redirect, render_template
-import bcrypt
-from models.user import update_user, update_user_info
-from models.posts import select_posts, select_image, img_update, background_update
+import imghdr
+from models.user import update_user, update_user_info, user_signup
+from models.posts import select_posts, select_image, img_update, background_update, upload_new_img, search_user
 
 actions_controller = Blueprint("actions_controller", __name__,)
 
@@ -55,10 +55,15 @@ def focus_photo():
     photo_caption = photo[1]
     return render_template("focus_on_photo.html", img_url=photo_img, caption=photo_caption, post_id=post_id)
 
-# BACK BUTTON ON GALLERY PAGE
+# BACK BUTTON TO GALLERY PAGE
 @actions_controller.route("/redirect/gallery")
 def redirect_to_gallery():
     return redirect("/gallery")
+
+# BACK BUTTON TO FRIENDS PAGE
+@actions_controller.route("/redirect/friend")
+def redirect_to_friends():
+    return redirect("/friend/list")
 
 # CHANGE PROFILE IMAGE
 @actions_controller.route("/set/profile_img")
@@ -77,6 +82,51 @@ def change_background_img():
     return redirect("/home")
 
 # INSERT IMAGE (work in progress)
-@actions_controller.route("/set/background_img", method=["POST"])
-def insert_img():
-    return redirect("/gallery")
+@actions_controller.route("/upload/image", methods=["POST"])
+def upload_img():
+    id = session["user_id"]
+    image_url = request.form.get("image_url")
+    caption = request.form.get("caption")
+    if image_url[-3] == "jpg" or "png":
+        upload_new_img(id, image_url, caption)
+        return redirect("/gallery")
+    elif image_url[-4] == "jpeg":
+        upload_new_img(id, image_url, caption)
+        return redirect("/gallery")
+    else:
+        return redirect("/gallery")
+
+# LOAD FRIEND LIST
+@actions_controller.route("/friend/list")
+def friends():
+    return render_template("my_friends.html")
+
+# SEARCH FOR FRIEND
+@actions_controller.route("/friend/search")
+def friend_search():
+    #FOR INSTRUCTOR: On 'my_friends.html' i have a Form. How come 'user = request.form.get("name")' does not work?
+    user = request.args.get("name")
+    show_user = search_user(user)
+    return render_template("search_friend.html", show_user=show_user, test=user)
+
+# VIEW ANOTHER USER PAGE
+@actions_controller.route("/user_profile")
+def view_page():
+    user_id = request.args.get("user_id")
+    user_info = update_user_info(user_id)
+    return render_template("view_profile.html", user_background=user_info["background_img"], user_profile=user_info["profile_img"], user_name=user_info["first_name"], user_surname=user_info["last_name"], user_address=user_info["address"], user_country=user_info["country"], user_breed=user_info["breed"], user_id=user_info["id"])
+
+#VIEW ANOTHER USER GALLERY
+@actions_controller.route("/view/photos")
+def view_photos():
+    user_id = request.args.get("user_id")
+    posts_info = select_posts(user_id)
+    return render_template("view_friend_photos.html", posts_info=posts_info)
+
+@actions_controller.route("/friend/photo")
+def focus_friend_photo():
+    post_id = request.args.get("photo_id")
+    photo = select_image(post_id)
+    photo_img = photo[0]
+    photo_caption = photo[1]
+    return render_template("focus_friend_photo.html", img_url=photo_img, caption=photo_caption, post_id=post_id)
