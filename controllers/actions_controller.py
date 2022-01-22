@@ -25,14 +25,20 @@ def home():
 # RENDER ALL IMAGES FROM DB
 @actions_controller.route("/gallery")
 def gallery():
-    id = session["user_id"]
-    photo_select = select_posts(id)
-    return render_template("gallery.html", photo_select=photo_select)
+    if session.get('user_id'):
+        id = session["user_id"]
+        photo_select = select_posts(id)
+        return render_template("gallery.html", photo_select=photo_select)
+    else:
+        return redirect("/")
 
 # REDIRECT TO EDIT PROFILE PAGE
 @actions_controller.route("/edit_profile")
 def edit_profile():
-    return render_template("edit_profile.html")
+    if session.get('user_id'):
+        return render_template("edit_profile.html")
+    else:
+        return redirect("/")
 
 # EDIT PROFILE INFORMATION
 @actions_controller.route("/edit_profile/process", methods=["POST"])
@@ -49,11 +55,21 @@ def edit_profile_process():
 # ZOOM ON INDIVIDUAL IMAGES
 @actions_controller.route("/photo")
 def focus_photo():
+    if session.get('user_id'):
+        post_id = request.args.get("photo_id")
+        photo = select_image(post_id)
+        photo_img = photo[0]
+        photo_caption = photo[1]
+        return render_template("focus_on_photo.html", img_url=photo_img, caption=photo_caption, post_id=post_id)
+    else:
+        return redirect("/")
+
+# DELETE PHOTO IN GALLERY
+@actions_controller.route("/delete/photo", methods=["GET"])
+def delete_photo():
     post_id = request.args.get("photo_id")
-    photo = select_image(post_id)
-    photo_img = photo[0]
-    photo_caption = photo[1]
-    return render_template("focus_on_photo.html", img_url=photo_img, caption=photo_caption, post_id=post_id)
+    delete_photo(post_id)
+    return redirect("/gallery")
 
 # BACK BUTTON TO GALLERY PAGE
 @actions_controller.route("/redirect/gallery")
@@ -99,34 +115,49 @@ def upload_img():
 # LOAD FRIEND LIST
 @actions_controller.route("/friend/list")
 def friends():
-    return render_template("my_friends.html")
+    if session.get('user_id'):
+        return render_template("my_friends.html")
+    else:
+        return redirect("/")
 
 # SEARCH FOR FRIEND
 @actions_controller.route("/friend/search")
 def friend_search():
+    if session.get('user_id'):
     #FOR INSTRUCTOR: On 'my_friends.html' i have a Form. How come 'user = request.form.get("name")' does not work?
-    user = request.args.get("name")
-    show_user = search_user(user)
-    return render_template("search_friend.html", show_user=show_user, test=user)
+        user = request.args.get("name")
+        show_user = search_user(user)
+        return render_template("search_friend.html", show_user=show_user, test=user)
+    else:
+        return redirect("/")
 
 # VIEW ANOTHER USER PAGE
 @actions_controller.route("/user_profile")
 def view_page():
-    user_id = request.args.get("user_id")
-    user_info = update_user_info(user_id)
-    return render_template("view_profile.html", user_background=user_info["background_img"], user_profile=user_info["profile_img"], user_name=user_info["first_name"], user_surname=user_info["last_name"], user_address=user_info["address"], user_country=user_info["country"], user_breed=user_info["breed"], user_id=user_info["id"])
+    if session.get('user_id'):
+        user_id = request.args.get("user_id")
+        user_info = update_user_info(user_id)
+        return render_template("view_profile.html", user_background=user_info["background_img"], user_profile=user_info["profile_img"], user_name=user_info["first_name"], user_surname=user_info["last_name"], user_address=user_info["address"], user_country=user_info["country"], user_breed=user_info["breed"], user_id=user_info["id"])
+    else:
+        return redirect("/")
 
 #VIEW ANOTHER USER GALLERY
 @actions_controller.route("/view/photos")
 def view_photos():
-    user_id = request.args.get("user_id")
-    posts_info = select_posts(user_id)
-    return render_template("view_friend_photos.html", posts_info=posts_info)
+    if session.get('user_id'):
+        user_id = request.args.get("user_id")
+        posts_info = select_posts(user_id)
+        return render_template("view_friend_photos.html", posts_info=posts_info)
+    else:
+        return redirect("/")
 
 @actions_controller.route("/friend/photo")
 def focus_friend_photo():
-    post_id = request.args.get("photo_id")
-    photo = select_image(post_id)
-    photo_img = photo[0]
-    photo_caption = photo[1]
-    return render_template("focus_friend_photo.html", img_url=photo_img, caption=photo_caption, post_id=post_id)
+    if session.get('user_id'):
+        post_id = request.args.get("photo_id")
+        photo = select_image(post_id)
+        photo_img = photo[0]
+        photo_caption = photo[1]
+        return render_template("focus_friend_photo.html", img_url=photo_img, caption=photo_caption, post_id=post_id)
+    else:
+        return redirect("/")

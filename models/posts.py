@@ -23,6 +23,9 @@ def upload_new_img(user_id, image, post):
 
 # SEARCH FRIEND
 def search_user(name):
-    # Why "SELECT * FROM users WHERE first_name LIKE CONCAT(%, %s, %), [name]" does not work? Also, LIKE case insensitive property not working.
-    results = database.sql_select("SELECT * FROM users WHERE first_name LIKE %s", [name])
+    results = database.sql_select("SELECT * FROM users WHERE first_name ILIKE %s", [f"%{name}%"])
     return results
+
+# DELETE PHOTO
+def delete_photo(post_id):
+    database.sql_write("DELETE FROM posts WHERE post_id = %s", [post_id])

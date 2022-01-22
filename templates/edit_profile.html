@@ -1,32 +1,35 @@
 {% extends "base.html" %}
 {% block content %}
-<form method="post" action="/edit_profile/process">
-    <h2>Edit Profile</h2>
-    <div>
-        <label for="name">First Name</label>
-        <input id="name" name="name" type="text" value="{{session['user_name']}}" />
-    
-        <label for="surname">Surname</label>
-        <input id="surname" name="surname" type="text" value="{{session['user_surname']}}" />
-    </div>
-    
-    <div>
-        <label for="address">Address</label>
-        <input id="address" name="address" type="text" value="{{session['user_address']}}"/>
-    </div>
 
-    <div>
-        <label for="country">Country</label>
-        <input id="country" name="country" value="{{session['user_country']}}"/>
-    </div>
+<div id="edit_profile">
+    <form method="post" action="/edit_profile/process">
+        <h2>Edit Profile</h2>
+        <div>
+            <label for="name">First Name</label>
+            <input id="name" name="name" type="text" value="{{session['user_name']}}" />
+        
+            <label for="surname">Surname</label>
+            <input id="surname" name="surname" type="text" value="{{session['user_surname']}}" />
+        </div>
+        
+        <div>
+            <label for="address">Address</label>
+            <input id="address" name="address" type="text" value="{{session['user_address']}}"/>
+        </div>
 
-    <div>
-        <label for="breed">Breed</label>
-        <input id="breed" name="breed" value="{{session['user_breed']}}"/>
-    </div>
+        <div>
+            <label for="country">Country</label>
+            <input id="country" name="country" value="{{session['user_country']}}"/>
+        </div>
 
-    <div>
-        <button type="submit">Save</button>
-    </div>
-</form>
+        <div>
+            <label for="breed">Breed</label>
+            <input id="breed" name="breed" value="{{session['user_breed']}}"/>
+        </div>
+
+        <div>
+            <button type="submit">Save</button>
+        </div>
+    </form>
+</div>
 {% endblock content %}
