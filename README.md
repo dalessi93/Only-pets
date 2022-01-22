@@ -5,7 +5,7 @@
 ## Objective
    Build a full-stack database-backed application.
    
-## Technical Requirements
+## [Technical Requirements](https://gist.git.generalassemb.ly/katie/86b54a1e57a95b73a699f38137cf2036)
 -   Have at least 2 tables – one of them should represent the people using your application (users).
 -   Include sign up/log in functionality, with encrypted passwords & an authorization flow.
 -   Modify data in the database. There should be ways for users to add/change some data in the database.
