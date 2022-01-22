@@ -1,7 +1,6 @@
 from flask import Blueprint, request, session, redirect, render_template
-import imghdr
-from models.user import update_user, update_user_info, user_signup
-from models.posts import select_posts, select_image, img_update, background_update, upload_new_img, search_user
+from models.user import update_user, update_user_info
+from models.posts import select_posts, select_image, img_update, background_update, upload_new_img, search_user, delete_photo
 
 actions_controller = Blueprint("actions_controller", __name__,)
 
@@ -66,7 +65,7 @@ def focus_photo():
 
 # DELETE PHOTO IN GALLERY
 @actions_controller.route("/delete/photo", methods=["GET"])
-def delete_photo():
+def delete_user_photo():
     post_id = request.args.get("photo_id")
     delete_photo(post_id)
     return redirect("/gallery")
